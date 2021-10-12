@@ -1,4 +1,4 @@
-
+process.env["BOT_TOKEN"] = "2047422854:AAE8hPHQkHwCtgm7Q8SMjXJTNseFVkmpWxY";
 console.log(process.env["BOT_TOKEN"])
 
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
