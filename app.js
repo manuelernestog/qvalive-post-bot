@@ -1,3 +1,6 @@
+
+console.log(process.env["BOT_TOKEN"])
+
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
