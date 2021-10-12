@@ -1,5 +1,5 @@
 {
-  "name": "CharlasCubaPostBot",
+  "name": "QvaLivePostBot",
   "version": "1.0.0",
   "description": "Bot para publicar charlas en el canal de CharlasCuba",
   "main": "bot.js",
