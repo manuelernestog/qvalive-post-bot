@@ -55,7 +55,7 @@ bot.on('message:text', (ctx) => {
     switch (ctx.session.state) {
         case 'date':
             ctx.session.item[ctx.session.state] = moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM [de] YYYY');
-            ctx.session.item[ctx.session.id] = moment(ctx.message.text, 'DD/MM/YYYY').format('X');
+            ctx.session.item["id"] = moment(ctx.message.text, 'DD/MM/YYYY').format('X');
             break;
         case 'time':
             ctx.session.item[ctx.session.state] = moment(ctx.message.text, 'HH:mm').format('hh:mm A');
