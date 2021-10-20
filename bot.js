@@ -55,6 +55,7 @@ bot.on('message:text', (ctx) => {
     switch (ctx.session.state) {
         case 'date':
             ctx.session.item[ctx.session.state] = moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM [de] YYYY');
+            ctx.session.item[ctx.session.id] = moment(ctx.message.text, 'DD/MM/YYYY').format('X');
             break;
         case 'time':
             ctx.session.item[ctx.session.state] = moment(ctx.message.text, 'HH:mm').format('hh:mm A');
@@ -127,6 +128,7 @@ function item_message(ctx) {
     if (ctx.session.item.group) message += '👥 Grupo: ' + ctx.session.item.group + '\n';
     if (ctx.session.item.channel) message += '📢 Canal: ' + ctx.session.item.channel + '\n';
     if (ctx.session.item.platform) message += '🌐 Plataforma: ' + ctx.session.item.platform + '\n';
+    if (ctx.session.item.date) message += '#️⃣ ID: [' + ctx.session.item.id + ']\n';
     if (ctx.session.item.link) message += '\n🔗 Link: ' + ctx.session.item.link + '\n';
     return message;
 }
