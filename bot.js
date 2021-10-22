@@ -1,7 +1,11 @@
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
+const Crawler = require("crawler");
+const cron = require("node-cron");
 moment.locale('es');
+
+// -------------post - functions ---------------------------
 
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Titulo*", "set_title").text("🗒 Descripcion", "set_desc").text("🖼 Portada", "set_cover").row()
@@ -184,6 +188,72 @@ function send_message(ctx) {
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 }
+
+// -------------crawler - list ---------------------------
+
+const craw = new Crawler({
+    maxConnections: 5,
+    callback: function (error, res, done) {
+        if (error) {
+            console.log(error);
+        } else {
+            let publication_list = creating_publication_list(res);
+            let message = generate_message(publication_list);
+            let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
+                caption: message,
+                parse_mode: "Markdown",
+                disable_web_page_preview: true
+            }).then(reply => {
+                bot.api.unpinAllChatMessages("-1001762987728");
+                bot.api.pinChatMessage("-1001762987728",reply.message_id);
+            })
+        }
+        done();
+    }
+});
+
+function creating_publication_list(res) {
+    var $ = res.$;
+    var publication_array = [];
+    $(".tgme_widget_message").each(function (index, element) {
+        let item = {};
+        item.post = 'https://t.me/' + $(element).attr('data-post');
+        item.title = $(element).find('b').text().match(/[0-9a-zA-Z+@!();:?=,$%*\-\s\.\#\/\,]+/g)[0];
+        let time = $(element).find('.tgme_widget_message_text').text().split('Hora: ')[1].substring(0, 8);
+        item.time = moment(time, 'hh:mm A');
+        publication_array.push(item);
+    });
+    return reorder_array(publication_array);
+}
+
+function reorder_array(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        for (var j = 0; j < (arr.length - i - 1); j++) {
+            if (arr[j].time > arr[j + 1].time) {
+                var temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}
+
+function generate_message(arr) {
+    var message = `*Cartelera @QvaLive ${moment().format('dddd, DD [de] MMMM [de] YYYY')}*\n\n`;
+    arr.forEach(function (item) {
+        message += `🎙 *${item.time.format('hh:mm A')}* - [${item.title}](${item.post}) \n\n`;
+    });
+    return message;
+}
+
+
+cron.schedule('0 7 * * *', () => {
+    let url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
+    craw.queue(url);
+});
+
+// -------------bot - handler ---------------------------
 
 bot.start();
 
