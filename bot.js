@@ -1,3 +1,5 @@
+process.env["BOT_TOKEN"] = "2047422854:AAE8hPHQkHwCtgm7Q8SMjXJTNseFVkmpWxY";
+
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
@@ -5,14 +7,15 @@ const Crawler = require("crawler");
 const cron = require("node-cron");
 moment.locale('es');
 
-// -------------post - functions ---------------------------
-
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Titulo*", "set_title").text("🗒 Descripcion", "set_desc").text("🖼 Portada", "set_cover").row()
+    .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capitulo", "set_episode").row()
     .text("📘 Tema", "set_theme").text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").row()
     .text("👤 Anfitrion", "set_host").text("🗣 Invitado", "set_guest").text("👥 Grupo", "set_group").row()
     .text("📢 Canal", "set_channel").text("🌐 Plataforma", "set_platform").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
+
+// -------------post - functions ---------------------------
 
 const confirmKeyboard = new InlineKeyboard().text("⬅️ Ir Atras", "set_back").text("🚀 Publicar", "set_launch").row();
 
@@ -58,7 +61,7 @@ bot.on('message:text', (ctx) => {
 
     switch (ctx.session.state) {
         case 'date':
-            ctx.session.item[ctx.session.state] = moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM [de] YYYY');
+            ctx.session.item[ctx.session.state] = capitalizeFirstLetter(moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM [de] YYYY'));
             ctx.session.item["id"] = moment(ctx.message.text, 'DD/MM/YYYY').format('DDMMYYYY');
             break;
         case 'time':
@@ -70,6 +73,10 @@ bot.on('message:text', (ctx) => {
     ctx.session.state = 'home';
     render_main_menu(ctx);
 });
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 bot.on('message:photo', (ctx) => {
     if (ctx.session == {}) return;
@@ -91,6 +98,9 @@ bot.callbackQuery("set_theme", async (ctx) => remove_main_and_request_input(ctx,
 bot.callbackQuery("set_link", async (ctx) => remove_main_and_request_input(ctx, "link", 'Introduzca el link de la publicación'));
 bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Utilice el formato: DD/MM/YYYY)'));
 bot.callbackQuery("set_time", async (ctx) => remove_main_and_request_input(ctx, "time", 'Introduzca la hora de la publicación (Utilice el formato: HH:mm)'));
+bot.callbackQuery("set_space", async (ctx) => remove_main_and_request_input(ctx, "space", 'Introduzca el nombre del espacio'));
+bot.callbackQuery("set_episode", async (ctx) => remove_main_and_request_input(ctx, "episode", 'Introduzca el numero del episodio'));
+bot.callbackQuery("set_season", async (ctx) => remove_main_and_request_input(ctx, "season", 'Introduzca el numero de la temporada'));
 bot.callbackQuery("set_host", async (ctx) => remove_main_and_request_input(ctx, "host", 'Introduzca el anfitrion de la publicación'));
 bot.callbackQuery("set_guest", async (ctx) => remove_main_and_request_input(ctx, "guest", 'Introduzca el invitado de la publicación'));
 bot.callbackQuery("set_platform", async (ctx) => remove_main_and_request_input(ctx, "platform", 'Introduzca la plataforma de la publicación'));
@@ -122,7 +132,20 @@ function remove_main_and_request_input(ctx, state, request_message) {
 
 function item_message(ctx) {
     let message = '';
-    if (ctx.session.item.title) message += '🎙 <b>' + ctx.session.item.title + '</b>\n\n';
+
+    message += '🎙 <b>';
+    if (ctx.session.item.space) {
+        message += ctx.session.item.space;
+        if (ctx.session.item.season || ctx.session.item.episode) {
+            message += ' ';
+            if (ctx.session.item.season) message += ctx.session.item.season + 'x';
+            if (ctx.session.item.episode) message += ctx.session.item.episode;
+        }
+        message += " - "
+    }
+    if (ctx.session.item.title) message += ctx.session.item.title;
+    message += '</b>\n\n';
+
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
     if (ctx.session.item.theme) message += '📘 Tema: ' + ctx.session.item.theme + '\n';
     if (ctx.session.item.date) message += '🗓 Fecha: ' + ctx.session.item.date + '\n';
@@ -181,7 +204,7 @@ function send_message(ctx) {
     if (ctx.session.item.cover) {
         ctx.api.sendPhoto("-1001762987728", ctx.session.item.cover, {caption: item_message(ctx), parse_mode: "HTML"});
     } else {
-        ctx.api.sendMessage("-1001762987728", item_message(ctx), {parse_mode: "HTML",disable_web_page_preview: true});
+        ctx.api.sendMessage("-1001762987728", item_message(ctx), {parse_mode: "HTML", disable_web_page_preview: true});
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply('Listo, tu publicación esta hecha, puedes verla en @charlascuba');
@@ -205,7 +228,7 @@ const craw = new Crawler({
                 disable_web_page_preview: true
             }).then(reply => {
                 bot.api.unpinAllChatMessages("-1001762987728");
-                bot.api.pinChatMessage("-1001762987728",reply.message_id);
+                bot.api.pinChatMessage("-1001762987728", reply.message_id);
             })
         }
         done();
@@ -218,7 +241,7 @@ function creating_publication_list(res) {
     $(".tgme_widget_message").each(function (index, element) {
         let item = {};
         item.post = 'https://t.me/' + $(element).attr('data-post');
-        item.title = $(element).find('b').text().match(/[0-9a-zA-Z+@!();:?=,$%*\-\s\.\#\/\,]+/g)[0];
+        item.title = $(element).find('b').text().match(/[0-9a-zA-Z+@!();:óíáéú?=,$%*\-\s\.\#\/\,]+/g)[0];
         let time = $(element).find('.tgme_widget_message_text').text().split('Hora: ')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
@@ -242,7 +265,7 @@ function reorder_array(arr) {
 function generate_message(arr) {
     var message = `*Cartelera @QvaLive ${moment().format('dddd, DD [de] MMMM [de] YYYY')}*\n\n`;
     arr.forEach(function (item) {
-        message += `🎙 *${item.time.format('hh:mm A')}* - [${item.title}](${item.post}) \n\n`;
+        message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
     return message;
 }
@@ -262,7 +285,7 @@ bot.catch((err) => {
     console.error(`Error while handling update ${ctx.update.update_id}:`);
     const e = err.error;
     if (e instanceof GrammyError) {
-         console.error("Error in request:", e.description);
+        console.error("Error in request:", e.description);
     } else if (e instanceof HttpError) {
         console.error("Could not contact Telegram:", e);
     } else {
