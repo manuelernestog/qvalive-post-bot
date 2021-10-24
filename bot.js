@@ -195,7 +195,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este es un bot para publicar en el canal @charlascuba.\nPara comenzar presione 👉 /comenzar`;
+    return `Hola ${ctx.msg.chat.first_name}, este es bot es para publicar en el canal @QvaLive.\nAntes de comenzar lee las reglas para crear una publicacion  👉 /reglas \nPara crear tu publicación presiona 👉 /comenzar \nSi tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
 }
 
 function send_message(ctx) {
@@ -205,7 +205,7 @@ function send_message(ctx) {
         ctx.api.sendMessage("-1001762987728", item_message(ctx), {parse_mode: "HTML", disable_web_page_preview: true});
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
-    ctx.reply('Listo, tu publicación esta hecha, puedes verla en @charlascuba');
+    ctx.reply('Listo, tu publicación se completó satisfactoriamente, puedes verla en @QvaLive');
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 }
