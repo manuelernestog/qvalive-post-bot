@@ -4,6 +4,8 @@ const moment = require('moment');
 const Crawler = require("crawler");
 const cron = require("node-cron");
 moment.locale('es');
+const http = require('http');
+var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Titulo*", "set_title").text("🗒 Descripcion", "set_desc").text("🖼 Portada", "set_cover").row()
@@ -238,7 +240,7 @@ const craw = new Crawler({
         if (error) {
             console.log(error);
         } else {
-            let publication_list = creating_publication_list(res);
+            publication_list = creating_publication_list(res);
             let message = generate_message(publication_list);
             let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
                 caption: message,
@@ -289,10 +291,10 @@ function generate_message(arr) {
 }
 
 
-cron.schedule('0 7 * * *', () => {
+// cron.schedule('0 7 * * *', () => {
     let url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
     craw.queue(url);
-});
+// });
 
 // -------------bot - handler ---------------------------
 
@@ -313,3 +315,13 @@ bot.catch((err) => {
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 });
+
+// server for api response
+
+http.createServer((request, response) => {
+    let body = [];
+    request.on('data', (chunk) => {
+    }).on('end', () => {
+        response.end(JSON.stringify(publication_list));
+    });
+}).listen(8081);
