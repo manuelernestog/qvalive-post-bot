@@ -6,7 +6,7 @@ const moment = require('moment');
 const Crawler = require("crawler");
 const cron = require("node-cron");
 moment.locale('es');
-const http = require('http');
+
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -317,15 +317,3 @@ bot.catch((err) => {
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 });
-
-// server for api response
-
-http.createServer((request, response) => {
-        let body = [];
-        request.on('data', (chunk) => {
-            body.push(chunk);
-        }).on('end', () => {
-            body = Buffer.concat(body).toString();
-            response.end(JSON.stringify(publication_list));
-        });
-}).listen(8080);
