@@ -195,7 +195,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este es bot es para publicar en el canal @QvaLive.\nAntes de comenzar lee las reglas para crear una publicacion  👉 /reglas \nPara crear tu publicación presiona 👉 /comenzar \nSi tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
+    return `Hola ${ctx.msg.chat.first_name}, este es bot es para publicar en el canal @QvaLive.\n\n🔸 Antes de comenzar lee las reglas para crear una publicacion  👉 /reglas \n\n🔸 Para crear tu publicación presiona 👉 /comenzar \n\n🔸 Si tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
 }
 
 function send_message(ctx) {
