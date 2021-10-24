@@ -1,3 +1,5 @@
+// process.env["BOT_TOKEN"] = "2064483896:AAHCOkUqOSfDEpElPVikLoFfFAcP9AFRWO0";
+
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
@@ -319,9 +321,16 @@ bot.catch((err) => {
 // server for api response
 
 http.createServer((request, response) => {
-    let body = [];
-    request.on('data', (chunk) => {
-    }).on('end', () => {
-        response.end(JSON.stringify(publication_list));
-    });
-}).listen(8081);
+    if (request.url === '/echo') {
+        let body = [];
+        request.on('data', (chunk) => {
+            body.push(chunk);
+        }).on('end', () => {
+            body = Buffer.concat(body).toString();
+            response.end(JSON.stringify(publication_list));
+        });
+    } else {
+        response.statusCode = 404;
+        response.end();
+    }
+}).listen(8080);
