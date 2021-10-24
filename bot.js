@@ -321,7 +321,6 @@ bot.catch((err) => {
 // server for api response
 
 http.createServer((request, response) => {
-    if (request.url === '/echo') {
         let body = [];
         request.on('data', (chunk) => {
             body.push(chunk);
@@ -329,8 +328,4 @@ http.createServer((request, response) => {
             body = Buffer.concat(body).toString();
             response.end(JSON.stringify(publication_list));
         });
-    } else {
-        response.statusCode = 404;
-        response.end();
-    }
 }).listen(8080);
