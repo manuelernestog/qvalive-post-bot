@@ -44,6 +44,18 @@ bot.command('cancelar', (ctx) => {
     ctx.reply(welcomen_message(ctx));
 });
 
+bot.command('ayuda', (ctx) => {
+    if (ctx.chat.id == "-1001762987728") return;
+
+    ctx.reply(help_message(ctx));
+});
+
+bot.command('reglas', (ctx) => {
+    if (ctx.chat.id == "-1001762987728") return;
+
+    ctx.reply(rules_message(ctx));
+});
+
 bot.command('borrar', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
@@ -94,7 +106,7 @@ bot.callbackQuery("set_title", async (ctx) => remove_main_and_request_input(ctx,
 bot.callbackQuery("set_desc", async (ctx) => remove_main_and_request_input(ctx, "desc", 'Introduzca la descripcion de la publicación'));
 bot.callbackQuery("set_theme", async (ctx) => remove_main_and_request_input(ctx, "theme", 'Introduzca la tema (utilice #)'));
 bot.callbackQuery("set_link", async (ctx) => remove_main_and_request_input(ctx, "link", 'Introduzca el link de la publicación'));
-bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Utilice el formato: DD/MM/YYYY)'));
+bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Puede utilizar el formato que le resulte mas facil: DD/MM/YYYY , DD/MM, DD-MM , entre otros )'));
 bot.callbackQuery("set_time", async (ctx) => remove_main_and_request_input(ctx, "time", 'Introduzca la hora de la publicación (Utilice el formato: HH:mm)'));
 bot.callbackQuery("set_space", async (ctx) => remove_main_and_request_input(ctx, "space", 'Introduzca el nombre del espacio'));
 bot.callbackQuery("set_episode", async (ctx) => remove_main_and_request_input(ctx, "episode", 'Introduzca el numero del episodio'));
@@ -104,7 +116,7 @@ bot.callbackQuery("set_guest", async (ctx) => remove_main_and_request_input(ctx,
 bot.callbackQuery("set_platform", async (ctx) => remove_main_and_request_input(ctx, "platform", 'Introduzca la plataforma de la publicación'));
 bot.callbackQuery("set_group", async (ctx) => remove_main_and_request_input(ctx, "group", 'Introduzca el grupo de la publicación'));
 bot.callbackQuery("set_channel", async (ctx) => remove_main_and_request_input(ctx, "channel", 'Introduzca el canal de la publicación'));
-bot.callbackQuery("set_cover", async (ctx) => remove_main_and_request_input(ctx, "cover", 'Envie la imagen de la portada (Recomendado 1280 x 720)'));
+bot.callbackQuery("set_cover", async (ctx) => remove_main_and_request_input(ctx, "cover", 'Envie la imagen de la portada'));
 bot.callbackQuery("set_cancel", async (ctx) => cancel_process(ctx));
 bot.callbackQuery("set_back", async (ctx) => {
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
@@ -195,7 +207,15 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este es bot es para publicar en el canal @QvaLive.\n\n🔸 Antes de comenzar lee las reglas para crear una publicacion  👉 /reglas \n\n🔸 Para crear tu publicación presiona 👉 /comenzar \n\n🔸 Si tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
+    return `Hola ${ctx.msg.chat.first_name}, este bot sen encarga de crear nuevas publicaciones en el canal @QvaLive.\n\n🔸 Antes de comenzar lee las reglas para crear una publicacion  👉 /reglas \n\n🔸 Para crear tu publicación presiona 👉 /comenzar \n\n🔸 Si tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
+}
+
+function help_message(ctx) {
+    return `\n\n Este proyecto solamente se encarga de facilitar el acceso,la visualizacion y el crecimiento de las transimiciones que se realizan en Cuba.`;
+}
+
+function rules_message(ctx) {
+    return `\n\n Este proyecto solamente se encarga de facilitar el acceso,la visualizacion y el crecimiento de las transimiciones que se realizan en Cuba.  \n\n El desarrollador de la plataforma no se hace responsable de las opiniones realizadas por los participantes en las transmiciones.`;
 }
 
 function send_message(ctx) {
