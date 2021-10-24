@@ -293,10 +293,10 @@ function generate_message(arr) {
 }
 
 
-// cron.schedule('0 7 * * *', () => {
+cron.schedule('0 11 * * *', () => {
     let url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
     craw.queue(url);
-// });
+});
 
 // -------------bot - handler ---------------------------
 
