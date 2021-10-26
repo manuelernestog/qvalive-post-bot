@@ -17,6 +17,7 @@
   "author": "Manuel Ernesto Garcia",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.24.0",
     "cheerio": "^1.0.0-rc.10",
     "crawler": "^1.3.0",
     "grammy": "^1.3.3",

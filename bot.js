@@ -5,9 +5,11 @@ const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
 const Crawler = require("crawler");
 const cron = require("node-cron");
+const axios = require("axios");
 moment.locale('es');
 
 var publication_list = {};
+let qvalive_url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
 
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Titulo*", "set_title").text("🗒 Descripcion", "set_desc").text("🖼 Portada", "set_cover").row()
@@ -243,6 +245,7 @@ const craw = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
+            const res = axios.put('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', JSON.stringify(publication_list));
             let message = generate_message(publication_list);
             let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
                 caption: message,
@@ -294,9 +297,10 @@ function generate_message(arr) {
 
 
 cron.schedule('0 11 * * *', () => {
-    let url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
-    craw.queue(url);
+    craw.queue(qvalive_url);
 });
+
+craw.queue(qvalive_url);
 
 // -------------bot - handler ---------------------------
 
