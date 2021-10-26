@@ -6,7 +6,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-let qvalive_url = 'https://t.me/s/qvalive?q=%5B' + moment().format('DDMMYYYY') + '%5D';
+let qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -243,7 +243,7 @@ const craw = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            const response = axios.put('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', JSON.stringify(publication_list));
+            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
             let message = generate_message(publication_list);
             let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
                 caption: message,
@@ -285,6 +285,14 @@ function reorder_array(arr) {
     return arr;
 }
 
+function array_to_obj(array) {
+    var obj = {};
+    array.forEach(function (item, index) {
+        obj[index] = item;
+    });
+    return obj;
+}
+
 function generate_message(arr) {
     var message = `*Cartelera @QvaLive ${moment().format('dddd, DD [de] MMMM [de] YYYY')}*\n\n`;
     arr.forEach(function (item) {
@@ -318,6 +326,5 @@ bot.catch((err) => {
 });
 
 // -------------staring server---------------------------
-
 craw.queue(qvalive_url);
 bot.start();
