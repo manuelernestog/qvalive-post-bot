@@ -213,7 +213,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos y condiciones de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
+    return `Hola ${ctx.msg.chat.first_name}, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
 }
 
 function faq_message(ctx) {
@@ -221,31 +221,25 @@ function faq_message(ctx) {
 }
 
 function rules_message(ctx) {
-    return `Términos y Condiciones de Uso de @QvaLive\n\n
-    *️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal publico y en la pagina web de QvaLive.\n
-    *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.\n
-    *️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.\n
-    *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obsenas, insultos, entre otros) en caso de ser reportados, pero no se responsailiza por los criteros u opiniones que emitan los mismos.\n
-    *️⃣ En caso de ser violados los terminos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanenete al usuario de la plataforma .\n
+    return `Términos y Condiciones de Uso de @QvaLive\n
+    *️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal publico y en la pagina web de QvaLive.
+    *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.
+    *️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.
+    *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obsenas, insultos, entre otros) en caso de ser reportados, pero no se responsailiza por los criteros u opiniones que emitan los mismos.
+    *️⃣ No se permiten publicaciones en la plataforma de los siguientes temas:
+🚫 Temas violentos o de incitacion a la violencia.
+🚫 Contenido Pornografico, violencia o explotación sexual.
+🚫 Organizaciones terroristas y delictivas.
+🚫 Actividades delictivas o ilicitas.
+🚫 Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad, nacionalidad, afiliación religiosa, afiliación política, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
+🚫 Temas politicos
+    *️⃣ En caso de ser violados los terminos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanenete al usuario de la plataforma .
     Estos Términos y Condiciones fueron editados el 30/10/2021.
     `;
 }
 
-//
-// - Violentos o de Incitacion a La violencia
-// - COntenido Pornografico
-// -organizaciones terroristas y delictivas.
-//     bullying
 // amenazas y mensajes de odio a figuras públicas, así como se hace con los usuarios privados.
-//     actividades delictivas
-// violencia o explotación sexual
-// Se prohíben los intentos de comprar, vender o intercambiar drogas de prescripción y mariguana.
-//     armas
-//
-// Se remueven mensajes de odio que ataque a personas basándose en raza, etnicidad, nacionalidad, afiliación religiosa, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
-//     Spam de cualquier tipo no relacionado con la tematica de la plataforma.
-//
-//     Opiniones políticas o religiosas intolerantes
+
 
 function send_message(ctx) {
     if (ctx.session.item.cover) {
@@ -323,7 +317,7 @@ function generate_message(arr) {
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
-    if (arr.length === 0){
+    if (arr.length === 0) {
         message += `🗓 NO HAY NINGUNA TRANSMICION PROGRAMADA PARA HOY.`;
     }
     return message;
