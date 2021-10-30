@@ -224,16 +224,22 @@ function rules_message(ctx) {
     return `Términos y Condiciones de Uso de @QvaLive
     
 *️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal publico y en la pagina web de QvaLive.
+
 *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.
+
 *️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.
+
 *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obscenas, insultos, entre otros) en caso de ser reportados, pero no se responsabiliza por los criterios u opiniones que emitan los mismos.
+
 *️⃣ No se permiten la publicaciones referentes a:
+
 ❌ Temas violentos o de incitación a la violencia.
 ❌ Contenido pornografico, violencia o explotación sexual.
 ❌ Organizaciones terroristas o delictivas.
 ❌ Actividades ilícitas o delictivas.
 ❌ Amenazas y mensajes de odio a usuarios de la plataforma o figuras públicas.
 ❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad, afiliación política, afiliación religiosa, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
+
 *️⃣ En caso de ser violados los términos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanentemente al usuario de la plataforma.
 
 Estos Términos y Condiciones fueron actualizados el 30/10/2021.`;
