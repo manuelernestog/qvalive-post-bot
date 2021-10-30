@@ -235,8 +235,7 @@ function rules_message(ctx) {
 ❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad, afiliación política, afiliación religiosa, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
 *️⃣ En caso de ser violados los terminos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanenete al usuario de la plataforma .
 
-Estos Términos y Condiciones fueron actualizados el 30/10/2021.
-    `;
+Estos Términos y Condiciones fueron actualizados el 30/10/2021.`;
 }
 
 
