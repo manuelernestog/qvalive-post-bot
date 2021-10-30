@@ -227,13 +227,14 @@ function rules_message(ctx) {
 *️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.
 *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obsenas, insultos, entre otros) en caso de ser reportados, pero no se responsailiza por los criteros u opiniones que emitan los mismos.
 *️⃣ No se permite la publicacion en la plataforma de referentes a:
- Temas violentos o de incitacion a la violencia.
- Contenido Pornografico, violencia o explotación sexual.
- Organizaciones terroristas o delictivas.
- Actividades ilicitas o delictivas.
- Amenazas y mensajes de odio a usuarios de la plataforma o figuras públicas.
- Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad, afiliación política, afiliación religiosa, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
+❌ Temas violentos o de incitacion a la violencia.
+❌ Contenido Pornografico, violencia o explotación sexual.
+❌ Organizaciones terroristas o delictivas.
+❌ Actividades ilicitas o delictivas.
+❌ Amenazas y mensajes de odio a usuarios de la plataforma o figuras públicas.
+❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad, afiliación política, afiliación religiosa, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
 *️⃣ En caso de ser violados los terminos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanenete al usuario de la plataforma .
+
 Estos Términos y Condiciones fueron actualizados el 30/10/2021.
     `;
 }
