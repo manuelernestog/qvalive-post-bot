@@ -211,7 +211,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este bot sen encarga de crear nuevas publicaciones en el canal @QvaLive.\n\n🔸 Antes de comenzar lee las reglas para crear una publicacion  👉 /reglas \n\n🔸 Para crear tu publicación presiona 👉 /comenzar \n\n🔸 Si tienes alguna duda puedes encontrar preguntas frecuetes en 👉 /ayuda`;
+    return `Hola ${ctx.msg.chat.first_name}, este bot sen encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee las reglas  👉 /reglas \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para aclarar dudas selecciona 👉 /ayuda`;
 }
 
 function help_message(ctx) {
@@ -298,6 +298,9 @@ function generate_message(arr) {
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
+    if (arr.length === 0){
+        message += `🗓🎙 NO HAY NINGUNA TRANSMICION PROGRAMADA PARA HOY.`;
+    }
     return message;
 }
 
@@ -326,5 +329,4 @@ bot.catch((err) => {
 });
 
 // -------------staring server---------------------------
-craw.queue(qvalive_url);
 bot.start();
