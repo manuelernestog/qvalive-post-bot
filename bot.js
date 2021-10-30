@@ -217,7 +217,31 @@ function welcomen_message(ctx) {
 }
 
 function faq_message(ctx) {
-    return `\n\n Este proyecto solamente se encarga de facilitar el acceso,la visualizacion y el crecimiento de las transimiciones que se realizan en Cuba.`;
+    return `
+P: Que es QvaLive ?
+R: QvaLive es una plataforma digital para difundir y fomentando el desarrollo e intercambio en espacios virtuales cubanos.
+
+P: Quien puede publicar en Qvalive ?
+R: Cualquier persona puede hacerlo siguiendo los /terminos y condiciones para realizar una publicación.
+
+P: Cuanto cuesta publicar en Qvalive ?
+R: Es totalmente gratis.
+
+P: Cuando intento enviar mi publicación dice que tengo campos requeridos (*) sin rellenar. Que puedo hacer ?
+R: Para insertar una publicación la misma debe tener titulo, fecha y hora.
+
+P: Como puedo eliminar un campo que adicione por error ?
+R: Haga click sobre el campo que desea eliminar y seleccione o introduzca el comando /borrar
+
+P: Donde puedo revisar mis publicaciones?
+R: Las publicaciones aparecen automaticamente en el canal @QvaLive y en el sitio web https://qvalive.netlify.app/ el dia de su emisión.
+
+P: Puedo crear una publicación fuera de Telegram?
+R: Por ahora no, para esta versión inicial Qvalive solamente se gestiona desde Telegram.
+
+P: Luego de insertar una publicación, puedo eliminarla o modificarla mediante el bot ?
+R: No, el bot solamente se encarga de insertar nuevas publicaciones.
+    `;
 }
 
 function rules_message(ctx) {
