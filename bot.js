@@ -51,7 +51,7 @@ bot.command('cancelar', (ctx) => {
 bot.command('faq', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
-    ctx.reply(faq(ctx));
+    ctx.reply(faq_message(ctx));
     ctx.reply(welcomen_message(ctx));
 });
 
@@ -216,13 +216,36 @@ function welcomen_message(ctx) {
     return `Hola ${ctx.msg.chat.first_name}, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos y condiciones de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
 }
 
-function faq(ctx) {
+function faq_message(ctx) {
     return `\n\n Este proyecto solamente se encarga de facilitar el acceso,la visualizacion y el crecimiento de las transimiciones que se realizan en Cuba.`;
 }
 
 function rules_message(ctx) {
-    return `\n\n Este proyecto solamente se encarga de facilitar el acceso,la visualizacion y el crecimiento de las transimiciones que se realizan en Cuba.  \n\n El desarrollador de la plataforma no se hace responsable de las opiniones realizadas por los participantes en las transmiciones.`;
+    return `Términos y Condiciones de Uso de @QvaLive\n\n
+    *️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal publico y en la pagina web de QvaLive.\n
+    *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.\n
+    *️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.\n
+    *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obsenas, insultos, entre otros) en caso de ser reportados, pero no se responsailiza por los criteros u opiniones que emitan los mismos.\n
+    *️⃣ En caso de ser violados los terminos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanenete al usuario de la plataforma .\n
+    Estos Términos y Condiciones fueron editados el 30/10/2021.
+    `;
 }
+
+//
+// - Violentos o de Incitacion a La violencia
+// - COntenido Pornografico
+// -organizaciones terroristas y delictivas.
+//     bullying
+// amenazas y mensajes de odio a figuras públicas, así como se hace con los usuarios privados.
+//     actividades delictivas
+// violencia o explotación sexual
+// Se prohíben los intentos de comprar, vender o intercambiar drogas de prescripción y mariguana.
+//     armas
+//
+// Se remueven mensajes de odio que ataque a personas basándose en raza, etnicidad, nacionalidad, afiliación religiosa, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
+//     Spam de cualquier tipo no relacionado con la tematica de la plataforma.
+//
+//     Opiniones políticas o religiosas intolerantes
 
 function send_message(ctx) {
     if (ctx.session.item.cover) {
