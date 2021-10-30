@@ -52,12 +52,14 @@ bot.command('ayuda', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
     ctx.reply(help_message(ctx));
+    ctx.reply(welcomen_message(ctx));
 });
 
 bot.command('reglas', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
     ctx.reply(rules_message(ctx));
+    ctx.reply(welcomen_message(ctx));
 });
 
 bot.command('borrar', (ctx) => {
@@ -211,7 +213,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este bot sen encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee las reglas  👉 /reglas \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para aclarar dudas selecciona 👉 /ayuda`;
+    return `Hola ${ctx.msg.chat.first_name}, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee las reglas  👉 /reglas \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para aclarar dudas selecciona 👉 /ayuda`;
 }
 
 function help_message(ctx) {
