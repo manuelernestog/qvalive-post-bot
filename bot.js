@@ -51,7 +51,7 @@ bot.command('cancelar', (ctx) => {
 bot.command('faq', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
-    ctx.reply(faq_message(ctx));
+    ctx.reply(faq_message(ctx), {disable_web_page_preview: true});
     ctx.reply(welcomen_message(ctx));
 });
 
