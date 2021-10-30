@@ -233,6 +233,9 @@ R: Para insertar una publicación la misma debe tener titulo, fecha y hora.
 P: Como puedo eliminar un campo que adicione por error ?
 R: Haga click sobre el campo que desea eliminar y seleccione o introduzca el comando /borrar
 
+P: Como puedo cancelar una publicación que ya no quiero enviar ?
+R: Intrudusca el comando /cancelar y se cancelara la publicación en curso.
+
 P: Donde puedo revisar mis publicaciones?
 R: Las publicaciones aparecen automaticamente en el canal @QvaLive y en el sitio web https://qvalive.netlify.app/ el dia de su emisión.
 
