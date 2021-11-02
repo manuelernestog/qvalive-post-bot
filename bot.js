@@ -358,9 +358,14 @@ function generate_message(arr) {
 // -------------cron job ---------------------------
 
 cron.schedule('0 11 * * *', () => {
-    craw.queue(qvalive_url);
+    console.log(qvalive_url);
     console.log(moment());
+    craw.queue(qvalive_url);
 });
+
+console.log(qvalive_url);
+console.log(moment());
+craw.queue(qvalive_url);
 
 // -------------bot - handler ---------------------------
 
