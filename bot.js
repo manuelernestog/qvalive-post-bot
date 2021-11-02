@@ -6,7 +6,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-let qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -358,14 +358,9 @@ function generate_message(arr) {
 // -------------cron job ---------------------------
 
 cron.schedule('0 11 * * *', () => {
-    console.log(qvalive_url);
-    console.log(moment());
+    qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
     craw.queue(qvalive_url);
 });
-
-console.log(qvalive_url);
-console.log(moment());
-craw.queue(qvalive_url);
 
 // -------------bot - handler ---------------------------
 
