@@ -237,7 +237,7 @@ P: Como puedo cancelar una publicación que ya no quiero enviar ?
 R: Intrudusca el comando /cancelar y se cancelara la publicación en curso.
 
 P: Donde puedo revisar mis publicaciones?
-R: Las publicaciones aparecen automaticamente en el canal @QvaLive y en el sitio web https://qvalive.netlify.app/ el dia de su emisión.
+R: Las publicaciones aparecen automaticamente en el canal @QvaLive y en el sitio web https://qvalive.com/ el dia de su emisión.
 
 P: Puedo crear una publicación fuera de Telegram?
 R: Por ahora no, para esta versión inicial Qvalive solamente se gestiona desde Telegram.
@@ -264,7 +264,7 @@ function rules_message(ctx) {
 ❌ Contenido pornografico, violencia o explotación sexual.
 ❌ Organizaciones terroristas o delictivas.
 ❌ Actividades ilícitas o delictivas.
-❌ Campañas politicas.
+❌ Campañas u organizaciones políticas.
 ❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad,  afiliación religiosa, afiliación política, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
 
 *️⃣ En caso de ser violados los términos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanentemente al usuario de la plataforma.
