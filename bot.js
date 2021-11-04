@@ -213,7 +213,7 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola ${ctx.msg.chat.first_name}, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
+    return `Hola, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
 }
 
 function faq_message(ctx) {
