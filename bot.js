@@ -10,10 +10,10 @@ var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
-    .text("✏️ Titulo*", "set_title").text("🗒 Descripcion", "set_desc").text("🖼 Portada", "set_cover").row()
-    .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capitulo", "set_episode").row()
+    .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
+    .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
     .text("📘 Tema", "set_theme").text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").row()
-    .text("👤 Anfitrion", "set_host").text("🗣 Invitado", "set_guest").text("👥 Grupo", "set_group").row()
+    .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("👥 Grupo", "set_group").row()
     .text("📢 Canal", "set_channel").text("🌐 Plataforma", "set_platform").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
 
@@ -38,7 +38,7 @@ bot.command('comenzar', (ctx) => {
     if (ctx.chat.id == "-1001762987728") return;
 
     ctx.session = {state: 'title', item: {}};
-    ctx.reply('Ingresa el título de la publicacion:');
+    ctx.reply('Ingresa el título de la publicación:');
 });
 
 bot.command('cancelar', (ctx) => {
@@ -109,15 +109,15 @@ bot.on('message:photo', (ctx) => {
 });
 
 bot.callbackQuery("set_title", async (ctx) => remove_main_and_request_input(ctx, "title", 'Introduzca el título de la publicación'));
-bot.callbackQuery("set_desc", async (ctx) => remove_main_and_request_input(ctx, "desc", 'Introduzca la descripcion de la publicación'));
+bot.callbackQuery("set_desc", async (ctx) => remove_main_and_request_input(ctx, "desc", 'Introduzca la descripción de la publicación'));
 bot.callbackQuery("set_theme", async (ctx) => remove_main_and_request_input(ctx, "theme", 'Introduzca la tema (utilice #)'));
 bot.callbackQuery("set_link", async (ctx) => remove_main_and_request_input(ctx, "link", 'Introduzca el link de la publicación'));
-bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Puede utilizar el formato que le resulte mas facil: DD/MM/YYYY , DD/MM, DD-MM , entre otros )'));
+bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Puede utilizar el formato que le resulte mas fácil: DD/MM/YYYY , DD/MM, DD-MM , entre otros )'));
 bot.callbackQuery("set_time", async (ctx) => remove_main_and_request_input(ctx, "time", 'Introduzca la hora de la publicación (Utilice el formato: HH:mm)'));
 bot.callbackQuery("set_space", async (ctx) => remove_main_and_request_input(ctx, "space", 'Introduzca el nombre del espacio'));
-bot.callbackQuery("set_episode", async (ctx) => remove_main_and_request_input(ctx, "episode", 'Introduzca el numero del episodio'));
-bot.callbackQuery("set_season", async (ctx) => remove_main_and_request_input(ctx, "season", 'Introduzca el numero de la temporada'));
-bot.callbackQuery("set_host", async (ctx) => remove_main_and_request_input(ctx, "host", 'Introduzca el anfitrion de la publicación'));
+bot.callbackQuery("set_episode", async (ctx) => remove_main_and_request_input(ctx, "episode", 'Introduzca el número del episodio'));
+bot.callbackQuery("set_season", async (ctx) => remove_main_and_request_input(ctx, "season", 'Introduzca el número de la temporada'));
+bot.callbackQuery("set_host", async (ctx) => remove_main_and_request_input(ctx, "host", 'Introduzca el anfitrión de la publicación'));
 bot.callbackQuery("set_guest", async (ctx) => remove_main_and_request_input(ctx, "guest", 'Introduzca el invitado de la publicación'));
 bot.callbackQuery("set_platform", async (ctx) => remove_main_and_request_input(ctx, "platform", 'Introduzca la plataforma de la publicación'));
 bot.callbackQuery("set_group", async (ctx) => remove_main_and_request_input(ctx, "group", 'Introduzca el grupo de la publicación'));
@@ -213,36 +213,36 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los terminos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
+    return `Hola, este bot se entcarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los términos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
 }
 
 function faq_message(ctx) {
     return `
-P: Que es QvaLive ?
+P: ¿Qué es QvaLive?
 R: QvaLive es una plataforma digital para difundir y fomentando el desarrollo e intercambio en espacios virtuales cubanos.
 
-P: Quien puede publicar en Qvalive ?
+P: ¿Quién puede publicar en Qvalive?
 R: Cualquier persona puede hacerlo siguiendo los /terminos y condiciones para realizar una publicación.
 
-P: Cuanto cuesta publicar en Qvalive ?
+P: ¿Cuánto cuesta publicar en Qvalive?
 R: Es totalmente gratis.
 
-P: Cuando intento enviar mi publicación dice que tengo campos requeridos (*) sin rellenar. Que puedo hacer ?
-R: Para insertar una publicación la misma debe tener titulo, fecha y hora.
+P: ¿Cuándo intento enviar mi publicación dice que tengo campos requeridos (*) sin rellenar. Que puedo hacer?
+R: Para insertar una publicación la misma debe tener título, fecha y hora.
 
-P: Como puedo eliminar un campo que adicione por error ?
+P: ¿Cómo puedo eliminar un campo que adicione por error?
 R: Haga click sobre el campo que desea eliminar y seleccione o introduzca el comando /borrar
 
-P: Como puedo cancelar una publicación que ya no quiero enviar ?
+P: ¿Cómo puedo cancelar una publicación que ya no quiero enviar?
 R: Intrudusca el comando /cancelar y se cancelara la publicación en curso.
 
-P: Donde puedo revisar mis publicaciones?
-R: Las publicaciones aparecen automaticamente en el canal @QvaLive y en el sitio web https://qvalive.com/ el dia de su emisión.
+P: ¿Dónde puedo revisar mis publicaciones?
+R: Las publicaciones aparecen automáticamente en el canal @QvaLive y en el sitio web https://qvalive.com/ el dia de su emisión.
 
-P: Puedo crear una publicación fuera de Telegram?
+P: ¿Puedo crear una publicación fuera de Telegram?
 R: Por ahora no, para esta versión inicial Qvalive solamente se gestiona desde Telegram.
 
-P: Luego de insertar una publicación, puedo eliminarla o modificarla mediante el bot ?
+P: ¿Puedo eliminar o modificar mediante el bot luego de insertar una publicación?
 R: No, el bot solamente se encarga de insertar nuevas publicaciones.
     `;
 }
@@ -250,7 +250,7 @@ R: No, el bot solamente se encarga de insertar nuevas publicaciones.
 function rules_message(ctx) {
     return `Términos y Condiciones de Uso de @QvaLive
     
-*️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal publico y en la pagina web de QvaLive.
+*️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal público y en la página web de QvaLive.
 
 *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.
 
@@ -261,8 +261,9 @@ function rules_message(ctx) {
 *️⃣ No se permiten las publicaciones referentes a:
 
 ❌ Temas violentos o de incitación a la violencia.
-❌ Contenido pornografico, violencia o explotación sexual.
+❌ Contenido pornográfico, violencia o explotación sexual.
 ❌ Organizaciones terroristas o delictivas.
+❌ Spam.
 ❌ Actividades ilícitas o delictivas.
 ❌ Campañas u organizaciones políticas.
 ❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad,  afiliación religiosa, afiliación política, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
@@ -350,7 +351,7 @@ function generate_message(arr) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
     if (arr.length === 0) {
-        message += `🗓 NO HAY NINGUNA TRANSMICION PROGRAMADA PARA HOY.`;
+        message += `🗓 NO HAY NINGUNA TRANSMICIÓN PROGRAMADA PARA HOY.`;
     }
     return message;
 }
