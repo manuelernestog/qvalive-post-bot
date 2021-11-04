@@ -250,11 +250,11 @@ R: No, el bot solamente se encarga de insertar nuevas publicaciones.
 function rules_message(ctx) {
     return `Términos y Condiciones de Uso de @QvaLive
     
-*️⃣ Las transmiciones introducidas por los usuarios se muestran en un canal público y en la página web de QvaLive.
+*️⃣ Las transmisiones introducidas por los usuarios se muestran en un canal público y en la página web de QvaLive.
 
 *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.
 
-*️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmiciones.
+*️⃣ QvaLive no se responsabiliza por los criterios que se emitan en las transmisiones.
 
 *️⃣ QvaLive modera los comentarios realizados por los usuarios (palabras obscenas, insultos, entre otros) en caso de ser reportados, pero no se responsabiliza por los criterios u opiniones que emitan los mismos.
 
@@ -351,7 +351,7 @@ function generate_message(arr) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
     if (arr.length === 0) {
-        message += `🗓 NO HAY NINGUNA TRANSMICIÓN PROGRAMADA PARA HOY.`;
+        message += `🗓 NO HAY NINGUNA TRANSMISIÓN PROGRAMADA PARA HOY.`;
     }
     return message;
 }
