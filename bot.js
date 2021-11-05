@@ -302,14 +302,16 @@ const craw = new Crawler({
             publication_list = creating_publication_list(res);
             const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
             let message = generate_message(publication_list);
-            let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
-                caption: message,
-                parse_mode: "Markdown",
-                disable_web_page_preview: true
-            }).then(reply => {
-                bot.api.unpinAllChatMessages("-1001762987728");
-                bot.api.pinChatMessage("-1001762987728", reply.message_id);
-            })
+            bot.api.unpinAllChatMessages("-1001762987728");
+            if (publication_list.length != 0) {
+                let message_promise = bot.api.sendPhoto("-1001762987728", "https://i.ibb.co/XCy0LL7/cartelera.png", {
+                    caption: message,
+                    parse_mode: "Markdown",
+                    disable_web_page_preview: true
+                }).then(reply => {
+                    bot.api.pinChatMessage("-1001762987728", reply.message_id);
+                });
+            }
         }
         done();
     }
@@ -355,9 +357,6 @@ function generate_message(arr) {
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
-    if (arr.length === 0) {
-        message += `🗓 NO HAY NINGUNA TRANSMISIÓN PROGRAMADA PARA HOY.`;
-    }
     return message;
 }
 
