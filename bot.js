@@ -282,7 +282,10 @@ function send_message(ctx) {
         ctx.api.sendMessage("-741787409", item_message(ctx), {parse_mode: "HTML", disable_web_page_preview: true});
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
-    ctx.reply('Listo, tu publicación se completó satisfactoriamente, puedes verla en @QvaLive');
+    ctx.reply(
+`Listo, tu publicación se completó satisfactoriamente, la publicación sera moderada lo antes posible (Siempre en menos de 24h) y luego publicada.
+Puedes verla en @QvaLive`
+    );
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 }
