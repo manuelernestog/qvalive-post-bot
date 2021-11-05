@@ -283,9 +283,9 @@ function send_message(ctx) {
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply(
-`Listo, tu publicación se completó satisfactoriamente, ahora sera moderada lo antes posible (Siempre en menos de 24h) y luego publicada en el canal @QvaLive.
+`Listo, tu publicación se completó satisfactoriamente, ahora sera moderada (Siempre en menos de 24h) y publicada en el canal @QvaLive.
 
-Desde QvaLive te sugerimos utilizar la publicación del canal para compartirla con tu comunidad, de esta manera todos contribuimos al crecimiento de todos los proyectos incluidos en la plataforma.`
+Desde QvaLive te sugerimos utilizar la publicación del canal para compartirla con tu comunidad, de esta manera contribuimos entre todos al crecimiento de los proyectos incluidos en la plataforma (incluido el tuyo claro).`
     );
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
