@@ -273,12 +273,13 @@ function rules_message(ctx) {
 Estos Términos y Condiciones fueron actualizados el 30/10/2021.`;
 }
 
+// Id del canal principal -1001762987728
 
 function send_message(ctx) {
     if (ctx.session.item.cover) {
-        ctx.api.sendPhoto("-1001762987728", ctx.session.item.cover, {caption: item_message(ctx), parse_mode: "HTML"});
+        ctx.api.sendPhoto("-741787409", ctx.session.item.cover, {caption: item_message(ctx), parse_mode: "HTML"});
     } else {
-        ctx.api.sendMessage("-1001762987728", item_message(ctx), {parse_mode: "HTML", disable_web_page_preview: true});
+        ctx.api.sendMessage("-741787409", item_message(ctx), {parse_mode: "HTML", disable_web_page_preview: true});
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply('Listo, tu publicación se completó satisfactoriamente, puedes verla en @QvaLive');
