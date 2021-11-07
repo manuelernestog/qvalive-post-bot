@@ -213,13 +213,13 @@ function cancel_process(ctx) {
 }
 
 function welcomen_message(ctx) {
-    return `Hola, este bot se entcarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los términos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
+    return `Hola, este bot se encarga de crear nuevas publicaciones en la plataforma @QvaLive.\n\n🔸 Antes de comenzar lee los términos de uso  👉 /terminos \n\n🔸 Para crear tu publicación selecciona 👉 /comenzar \n\n🔸 Para ver preguntas frecuentes  👉 /faq`;
 }
 
 function faq_message(ctx) {
     return `
 P: ¿Qué es QvaLive?
-R: QvaLive es una plataforma digital para difundir y fomentando el desarrollo e intercambio en espacios virtuales cubanos.
+R: QvaLive es un espacio digital para difundir y fomentando el desarrollo e intercambio en espacios virtuales cubanos.
 
 P: ¿Quién puede publicar en Qvalive?
 R: Cualquier persona puede hacerlo siguiendo los /terminos y condiciones para realizar una publicación.
@@ -268,7 +268,7 @@ function rules_message(ctx) {
 ❌ Campañas u organizaciones políticas.
 ❌ Ataques a personas, grupos, entidades o gobiernos basándose en raza, etnicidad,  afiliación religiosa, afiliación política, nacionalidad, orientación sexual, sexo, género o identidad de género, discapacidades o enfermedades.
 
-*️⃣ En caso de ser violados los términos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanentemente al usuario de la plataforma.
+*️⃣ En caso de ser violados los términos anteriormente descritos, QvaLive se reserva el derecho de eliminar cualquier publicación o banear permanentemente al usuario.
 
 Estos Términos y Condiciones fueron actualizados el 30/10/2021.`;
 }
