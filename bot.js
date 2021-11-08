@@ -76,9 +76,7 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.on('::url', (ctx) => {
-   console.log('asd');
-})
+bot.hears(/echo *(.+)?/, (ctx) => { ... });
 
 
 bot.on('message:text', (ctx) => {
