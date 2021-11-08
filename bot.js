@@ -76,8 +76,12 @@ bot.command('borrar', (ctx) => {
     }
 });
 
+bot.hears('ID:', (ctx) => {
+   console.log('asd');
+})
+
+
 bot.on('message:text', (ctx) => {
-    console.log(ctx.chat.id);
     if (ctx.chat.id == channelID) {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
@@ -106,7 +110,6 @@ function capitalizeFirstLetter(string) {
 }
 
 bot.on('message:photo', (ctx) => {
-    console.log(ctx.chat.id+'asd');
     if (ctx.chat.id == channelID) {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
