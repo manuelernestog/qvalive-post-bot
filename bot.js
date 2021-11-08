@@ -108,6 +108,28 @@ bot.on('message:photo', (ctx) => {
     ctx.session.state = 'home';
 });
 
+const webListUpdater = new Crawler({
+    maxConnections: 5,
+    callback: function (error, res, done) {
+        if (error) {
+            console.log(error);
+        } else {
+            publication_list = creating_publication_list(res);
+            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+        }
+        done();
+    }
+});
+
+bot.on('message', (ctx) =>{
+    if (ctx.chat.id != "-1001762987728") return
+    qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+    webListUpdater.queue(qvalive_url);
+    console.log(moment());
+});
+
+
+
 bot.callbackQuery("set_title", async (ctx) => remove_main_and_request_input(ctx, "title", 'Introduzca el título de la publicación'));
 bot.callbackQuery("set_desc", async (ctx) => remove_main_and_request_input(ctx, "desc", 'Introduzca la descripción de la publicación'));
 bot.callbackQuery("set_theme", async (ctx) => remove_main_and_request_input(ctx, "theme", 'Introduzca la tema (utilice #)'));
@@ -301,6 +323,7 @@ const craw = new Crawler({
         } else {
             publication_list = creating_publication_list(res);
             const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+
             let message = generate_message(publication_list);
             bot.api.unpinAllChatMessages("-1001762987728");
             if (publication_list.length != 0) {
