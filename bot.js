@@ -121,12 +121,20 @@ const webListUpdater = new Crawler({
     }
 });
 
-bot.on('message', (ctx) =>{
-    if (ctx.chat.id != "-1001762987728") return
+
+bot.on("message", (ctx) => {
+    console.log(moment());
+    console.log(ctx.chat.id);
     qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
     webListUpdater.queue(qvalive_url);
-    console.log(moment());
 });
+
+
+// bot.on('message', (ctx) =>{
+//     if (ctx.chat.id != "-1001762987728") return
+
+//
+// });
 
 
 
