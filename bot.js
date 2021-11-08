@@ -73,10 +73,12 @@ bot.command('borrar', (ctx) => {
 });
 
 bot.on('message:text', (ctx) => {
+    console.log(moment());
+    console.log(ctx.chat.id);
+
     if (ctx.chat.id == "-1001762987728") {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
-        console.log(moment());
         return;
     }
 
@@ -105,7 +107,6 @@ bot.on('message:photo', (ctx) => {
     if (ctx.chat.id == "-1001762987728") {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
-        console.log(moment());
         return;
     }
 
