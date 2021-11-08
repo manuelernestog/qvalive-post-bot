@@ -76,7 +76,9 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.hears(/echo *(.+)?/, (ctx) => { ... });
+bot.hears(/echo *(.+)?/, (ctx) => {
+    console.log('paco');
+});
 
 
 bot.on('message:text', (ctx) => {
