@@ -76,7 +76,7 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.hears(/echo *(.+)?/, (ctx) => {
+bot.hears(/ID: *(.+)?/, (ctx) => {
     console.log('paco');
 });
 
