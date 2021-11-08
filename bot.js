@@ -30,6 +30,7 @@ bot.use(session({
 }));
 
 bot.command('start', (ctx) => {
+    console.log(ctx.chat.id);
     if (ctx.chat.id == channelID) return;
 
     ctx.session = {};
