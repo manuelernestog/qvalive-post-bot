@@ -76,7 +76,7 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.hears('ID:', (ctx) => {
+bot.on('::url', (ctx) => {
    console.log('asd');
 })
 
