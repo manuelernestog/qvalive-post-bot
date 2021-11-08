@@ -73,6 +73,13 @@ bot.command('borrar', (ctx) => {
 });
 
 bot.on('message:text', (ctx) => {
+    if (ctx.chat.id == "-1001762987728") {
+        qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+        webListUpdater.queue(qvalive_url);
+        console.log(moment());
+        return;
+    }
+
     if (Object.keys(ctx.session).length === 0) return
 
     switch (ctx.session.state) {
@@ -95,6 +102,13 @@ function capitalizeFirstLetter(string) {
 }
 
 bot.on('message:photo', (ctx) => {
+    if (ctx.chat.id == "-1001762987728") {
+        qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+        webListUpdater.queue(qvalive_url);
+        console.log(moment());
+        return;
+    }
+
     if (ctx.session == {}) return;
 
     if (ctx.session.state == 'cover') {
@@ -119,14 +133,6 @@ const webListUpdater = new Crawler({
         }
         done();
     }
-});
-
-
-bot.on("message", (ctx) => {
-    console.log(moment());
-    console.log(ctx.chat.id);
-    qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
-    webListUpdater.queue(qvalive_url);
 });
 
 
