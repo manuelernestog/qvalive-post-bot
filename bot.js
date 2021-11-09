@@ -75,13 +75,13 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.hears(/(.+)/, (ctx) => {
-    if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
-        webListUpdater.queue(qvalive_url);
-        return;
-    }
-});
+// bot.hears(/(.+)/, (ctx) => {
+//     if (ctx.chat.id == channelID) {
+//         qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
+//         webListUpdater.queue(qvalive_url);
+//         return;
+//     }
+// });
 
 
 bot.on('message:text', (ctx) => {
