@@ -75,15 +75,6 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-// bot.hears(/(.+)/, (ctx) => {
-//     if (ctx.chat.id == channelID) {
-//         qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
-//         webListUpdater.queue(qvalive_url);
-//         return;
-//     }
-// });
-
-
 bot.on('message:text', (ctx) => {
     if (Object.keys(ctx.session).length === 0) return
 
@@ -118,6 +109,14 @@ bot.on('message:photo', (ctx) => {
         });
     }
     ctx.session.state = 'home';
+});
+
+bot.hears(/(.+)/, (ctx) => {
+    if (ctx.chat.id == channelID) {
+        qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
+        webListUpdater.queue(qvalive_url);
+        return;
+    }
 });
 
 const webListUpdater = new Crawler({
