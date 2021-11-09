@@ -6,8 +6,8 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-const channelID = "-1001699259987" // TestChannel
-// const channelID = "-1001762987728"  //  OriginalChannel
+// const channelID = "-1001699259987" // TestChannel
+const channelID = "-1001762987728"  //  OriginalChannel
 
 var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
