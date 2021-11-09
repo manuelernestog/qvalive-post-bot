@@ -80,7 +80,7 @@ bot.on('message:text', (ctx) => {
 
     switch (ctx.session.state) {
         case 'date':
-            ctx.session.item[ctx.session.state] = capitalizeFirstLetter(moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM [de] YYYY'));
+            ctx.session.item[ctx.session.state] = capitalizeFirstLetter(moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM'));
             ctx.session.item["id"] = moment(ctx.message.text, 'DD/MM/YYYY').format('DDMMYYYY');
             break;
         case 'time':
