@@ -359,7 +359,7 @@ function creating_publication_list(res) {
     $(".tgme_widget_message").each(function (index, element) {
         let item = {};
         item.post = 'https://t.me/' + $(element).attr('data-post');
-        item.title = $(element).find('b').text().match(/[0-9a-zA-Z+@!();:óíáéú?=,$%*\-\s\.\#\/\,]+/g)[0];
+        item.title = $(element).find('b').text().match(/(.+)+/g)[0];
         let time = $(element).find('.tgme_widget_message_text').text().split('Hora: ')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
