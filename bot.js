@@ -77,7 +77,7 @@ bot.command('borrar', (ctx) => {
 });
 
 bot.hears(/(.+)/, (ctx) => {
-    console.log('paco');
+    console.log(moment());
     if (ctx.chat.id == channelID) {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
