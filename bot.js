@@ -113,6 +113,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
+        console.log('asd');
         qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
         return;
