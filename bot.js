@@ -76,18 +76,17 @@ bot.command('borrar', (ctx) => {
     }
 });
 
-bot.hears(/ID: *(.+)?/, (ctx) => {
+bot.hears(/ *(.+)?/, (ctx) => {
     console.log('paco');
-});
-
-
-bot.on('message:text', (ctx) => {
     if (ctx.chat.id == channelID) {
         qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
         return;
     }
+});
 
+
+bot.on('message:text', (ctx) => {
     if (Object.keys(ctx.session).length === 0) return
 
     switch (ctx.session.state) {
@@ -110,12 +109,6 @@ function capitalizeFirstLetter(string) {
 }
 
 bot.on('message:photo', (ctx) => {
-    if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
-        webListUpdater.queue(qvalive_url);
-        return;
-    }
-
     if (ctx.session == {}) return;
 
     if (ctx.session.state == 'cover') {
