@@ -6,11 +6,10 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-// const testChannelID = "-1001699259987"
-// const channelID = "-1001762987728"
-const channelID = "-1001699259987"
+// const channelID = "-1001699259987" // TestChannel
+const channelID = "-1001762987728"  //  OriginalChannel
 
-var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
