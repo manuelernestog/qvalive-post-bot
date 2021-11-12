@@ -19,9 +19,8 @@ var publication_list = {};
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
     .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
-    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").row()
-    .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").row()
-    .text("📢 Via", "set_channel").text("🔗 Link", "set_link").row()
+    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").text("📢 Via", "set_channel").row()
+    .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
 
 // -------------post - functions ---------------------------
@@ -162,7 +161,7 @@ bot.callbackQuery("set_launch", async (ctx) => send_message(ctx));
 bot.callbackQuery("set_ready", async (ctx) => {
     if (!ctx.session.item.title || !ctx.session.item.date || !ctx.session.item.time || ctx.session.item.date == 'Fecha inválida' || ctx.session.item.time == 'Fecha inválida') {
         ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
-        ctx.reply("Tiene campos requeridos (*) sin rellenar o valores invalidos.");
+        ctx.reply("🛑 Hay campos requeridos (*) sin rellenar o valores invalidos.");
         render_main_menu(ctx);
     } else {
         render_release_menu(ctx);
@@ -194,23 +193,28 @@ function item_message(ctx) {
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
     if (ctx.session.item.date) message += '🗓 ' + ctx.session.item.date + '\n';
     if (ctx.session.item.time) message += '⏱ ' + ctx.session.item.time + '\n';
-    if (ctx.session.item.host) message += '👤 ' + ctx.session.item.host + '\n';
-    if (ctx.session.item.guest) message += '🗣 ' + ctx.session.item.guest + '\n';
-    if (ctx.session.item.channel) message += '📢 Via ' + ctx.session.item.channel + '\n';
-    if (ctx.session.item.date) message += '#️⃣ ' + ctx.session.item.id + '\n';
+    if (ctx.session.item.host) message += '👤 Anf ' + ctx.session.item.host + '\n';
+    if (ctx.session.item.guest) message += '🗣 Inv ' + ctx.session.item.guest + '\n';
+    if (ctx.session.item.channel) message += '📢 Vía ' + ctx.session.item.channel + '\n';
     if (ctx.session.item.link) message += '🔗 ' + ctx.session.item.link + '\n';
     return message;
 }
 
 function render_main_menu(ctx) {
+    let message = item_message(ctx)
+
+    if (message.length > 280){
+        ctx.reply("⚠️ Su mensaje excede los 280 caracteres ("+message.length+") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
+    }
+
     if (ctx.session.item.cover) {
         ctx.replyWithPhoto(ctx.session.item.cover, {
-            caption: item_message(ctx),
+            caption: message,
             reply_markup: mainKeyboard,
             parse_mode: "HTML",
         });
     } else {
-        ctx.reply(item_message(ctx), {
+        ctx.reply(message, {
             reply_markup: mainKeyboard, parse_mode: "HTML",
         });
     }
