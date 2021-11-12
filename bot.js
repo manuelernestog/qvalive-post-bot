@@ -1,4 +1,9 @@
 process.env["BOT_TOKEN"] = "2100982315:AAF3bkoBudsHuno5p7YKc0qs4ORtBB_nQrE"; // test bot key
+const channelName = "qvalivetestchannel"; //  TestChannel
+const channelID = "-1001699259987"; // TestChannel
+
+// const channelName = "qvalive"; // OriginalChannel
+// const channelID = "-1001762987728";  //  OriginalChannel
 
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
@@ -8,10 +13,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-const channelID = "-1001699259987" // TestChannel
-// const channelID = "-1001762987728"  //  OriginalChannel
-
-var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -115,7 +117,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/qvalive?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
+        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -379,7 +381,7 @@ function array_to_obj(array) {
 }
 
 function generate_message(arr) {
-    var message = `*Cartelera @QvaLive ${moment().format('dddd DD [de] MMM')}*\n\n`;
+    var message = `*Cartelera @QvaLive ${moment().format('dddd DD [de] MMMM')}*\n\n`;
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
