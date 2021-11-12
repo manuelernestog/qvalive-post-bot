@@ -286,7 +286,7 @@ R: No, el bot solamente se encarga de insertar nuevas publicaciones.
 function rules_message(ctx) {
     return `Términos y Condiciones de Uso de @QvaLive
     
-*️⃣ Las transmisiones introducidas por los usuarios se muestran en un canal público y en la página web de QvaLive.
+*️⃣ Las transmisiones introducidas por los usuarios se muestran en los canales públicos y en la página web de QvaLive.
 
 *️⃣ QvaLive no almacena ninguna información de los usuarios que crean las publicaciones.
 
