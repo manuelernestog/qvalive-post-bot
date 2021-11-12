@@ -389,10 +389,10 @@ function generate_message(arr) {
 
 // -------------cron job ---------------------------
 
-// cron.schedule('0 11 * * *', () => {
+cron.schedule('0 11 * * *', () => {
     qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
     craw.queue(qvalive_url);
-// });
+});
 
 // -------------bot - handler ---------------------------
 
