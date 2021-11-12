@@ -13,7 +13,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(4, 'hours').format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -116,7 +116,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(4, 'hours').format('ddd DD / MMM');
+        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(5, 'hours').format('ddd DD / MMM');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -399,7 +399,7 @@ function generate_message(arr) {
 
 // -------------cron job ---------------------------
 
-cron.schedule('0 10 * * *', () => {
+cron.schedule('0 12 * * *', () => {
     qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().format('ddd DD MMM');
     craw.queue(qvalive_url);
 });
