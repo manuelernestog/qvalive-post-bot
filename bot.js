@@ -379,7 +379,7 @@ function array_to_obj(array) {
 }
 
 function generate_message(arr) {
-    var message = `*Cartelera @QvaLive ${moment().format('dddd, DD [de] MMMM [de] YYYY')}*\n\n`;
+    var message = `*Cartelera @QvaLive ${moment().format('ddd DD / MMM')}*\n\n`;
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
