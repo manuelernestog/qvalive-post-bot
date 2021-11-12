@@ -13,7 +13,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(4, 'hours').format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -116,7 +116,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(5, 'hours').format('DDMMYYYY');
+        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(4, 'hours').format('ddd DD / MMM');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -202,10 +202,7 @@ function item_message(ctx) {
 
 function render_main_menu(ctx) {
     let message = item_message(ctx)
-
-    if (message.length > 280){
-        ctx.reply("⚠️ Su mensaje excede los 280 caracteres ("+message.length+") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
-    }
+    render_text_length_message(ctx);
 
     if (ctx.session.item.cover) {
         ctx.replyWithPhoto(ctx.session.item.cover, {
@@ -220,16 +217,25 @@ function render_main_menu(ctx) {
     }
 }
 
+function render_text_length_message(ctx) {
+    let message = item_message(ctx)
+    if (message.length > 280){
+        ctx.reply("⚠️ Su mensaje excede los 280 caracteres ("+message.length+") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
+    }
+}
+
 function render_release_menu(ctx) {
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
+    render_text_length_message(ctx);
+    let message = item_message(ctx);
     if (ctx.session.item.cover) {
         ctx.replyWithPhoto(ctx.session.item.cover, {
-            caption: item_message(ctx),
+            caption: message,
             reply_markup: confirmKeyboard,
             parse_mode: "HTML",
         });
     } else {
-        ctx.reply(item_message(ctx), {
+        ctx.reply(message, {
             reply_markup: confirmKeyboard,
             parse_mode: "HTML",
         });
@@ -354,9 +360,8 @@ function creating_publication_list(res) {
     $(".tgme_widget_message").each(function (index, element) {
         let item = {};
         item.post = 'https://t.me/' + $(element).attr('data-post');
-        let elements = $(element).find('b');
-        item.title = elements.eq(0).text() + elements.eq(1).text();
-        let time = $(element).find('.tgme_widget_message_text').text().split('Hora: ')[1].substring(0, 8);
+        item.title =  $(element).find('b').eq(1).text();
+        let time = $(element).find('.tgme_widget_message_text').text().split('⏱ ')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
     });
@@ -394,8 +399,8 @@ function generate_message(arr) {
 
 // -------------cron job ---------------------------
 
-cron.schedule('0 11 * * *', () => {
-    qvalive_url = 'https://t.me/s/qvalive?q=' + moment().format('DDMMYYYY');
+cron.schedule('0 10 * * *', () => {
+    qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().format('ddd DD MMM');
     craw.queue(qvalive_url);
 });
 
