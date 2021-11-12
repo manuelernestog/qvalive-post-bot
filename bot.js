@@ -1,3 +1,5 @@
+process.env["BOT_TOKEN"] = "2100982315:AAF3bkoBudsHuno5p7YKc0qs4ORtBB_nQrE"; // test bot key
+
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
@@ -6,8 +8,8 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-// const channelID = "-1001699259987" // TestChannel
-const channelID = "-1001762987728"  //  OriginalChannel
+const channelID = "-1001699259987" // TestChannel
+// const channelID = "-1001762987728"  //  OriginalChannel
 
 var qvalive_url = 'https://t.me/s/qvalive?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
@@ -15,9 +17,9 @@ var publication_list = {};
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
     .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
-    .text("📘 Tema", "set_theme").text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").row()
-    .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("👥 Grupo", "set_group").row()
-    .text("📢 Canal", "set_channel").text("🌐 Plataforma", "set_platform").text("🔗 Link", "set_link").row()
+    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").row()
+    .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").row()
+    .text("📢 Via", "set_channel").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
 
 // -------------post - functions ---------------------------
@@ -80,7 +82,7 @@ bot.on('message:text', (ctx) => {
 
     switch (ctx.session.state) {
         case 'date':
-            ctx.session.item[ctx.session.state] = capitalizeFirstLetter(moment(ctx.message.text, 'DD/MM/YYYY').format('dddd, DD [de] MMMM'));
+            ctx.session.item[ctx.session.state] = capitalizeFirstLetter(moment(ctx.message.text, 'DD/MM/YYYY').format('ddd DD / MMM'));
             ctx.session.item["id"] = moment(ctx.message.text, 'DD/MM/YYYY').format('DDMMYYYY');
             break;
         case 'time':
@@ -188,14 +190,11 @@ function item_message(ctx) {
     message += '</b>\n\n';
 
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
-    if (ctx.session.item.theme) message += '📘 Tema: ' + ctx.session.item.theme + '\n';
-    if (ctx.session.item.date) message += '🗓 Fecha: ' + ctx.session.item.date + '\n';
-    if (ctx.session.item.time) message += '⏱ Hora: ' + ctx.session.item.time + '\n';
+    if (ctx.session.item.date) message += '🗓  ' + ctx.session.item.date + '\n';
+    if (ctx.session.item.time) message += '⏱  ' + ctx.session.item.time + '\n';
     if (ctx.session.item.host) message += '👤 Anfitrion: ' + ctx.session.item.host + '\n';
     if (ctx.session.item.guest) message += '🗣 Invitado(s): ' + ctx.session.item.guest + '\n';
-    if (ctx.session.item.group) message += '👥 Grupo: ' + ctx.session.item.group + '\n';
-    if (ctx.session.item.channel) message += '📢 Canal: ' + ctx.session.item.channel + '\n';
-    if (ctx.session.item.platform) message += '🌐 Plataforma: ' + ctx.session.item.platform + '\n';
+    if (ctx.session.item.channel) message += '📢 Via ' + ctx.session.item.channel + '\n';
     if (ctx.session.item.date) message += '#️⃣ ID: [' + ctx.session.item.id + ']\n';
     if (ctx.session.item.link) message += '\n🔗 Link: ' + ctx.session.item.link + '\n';
     return message;
