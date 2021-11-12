@@ -349,7 +349,8 @@ function creating_publication_list(res) {
     $(".tgme_widget_message").each(function (index, element) {
         let item = {};
         item.post = 'https://t.me/' + $(element).attr('data-post');
-        item.title = $(element).find('b').text().match(/(.+)+/g)[0];
+        let elements = $(element).find('b');
+        item.title = elements.eq(0).text() + elements.eq(1).text();
         let time = $(element).find('.tgme_widget_message_text').text().split('Hora: ')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
@@ -379,7 +380,7 @@ function array_to_obj(array) {
 }
 
 function generate_message(arr) {
-    var message = `*Cartelera @QvaLive ${moment().format('ddd DD / MMM')}*\n\n`;
+    var message = `*Cartelera @QvaLive ${moment().format('dddd DD [de] MMM')}*\n\n`;
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
