@@ -330,7 +330,7 @@ const craw = new Crawler({
             let message = generate_message(publication_list);
             bot.api.unpinAllChatMessages(channelID);
             if (publication_list.length != 0) {
-                let message_promise = bot.api.sendPhoto(channelID, "https://i.ibb.co/XCy0LL7/cartelera.png", {
+                let message_promise = bot.api.sendPhoto(channelID, "https://i.ibb.co/m6Pg0YX/cartelera2.png", {
                     caption: message,
                     parse_mode: "Markdown",
                     disable_web_page_preview: true
