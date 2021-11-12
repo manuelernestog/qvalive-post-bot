@@ -190,13 +190,13 @@ function item_message(ctx) {
     message += '</b>\n\n';
 
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
-    if (ctx.session.item.date) message += '🗓  ' + ctx.session.item.date + '\n';
-    if (ctx.session.item.time) message += '⏱  ' + ctx.session.item.time + '\n';
-    if (ctx.session.item.host) message += '👤 Anfitrion: ' + ctx.session.item.host + '\n';
-    if (ctx.session.item.guest) message += '🗣 Invitado(s): ' + ctx.session.item.guest + '\n';
+    if (ctx.session.item.date) message += '🗓 ' + ctx.session.item.date + '\n';
+    if (ctx.session.item.time) message += '⏱ ' + ctx.session.item.time + '\n';
+    if (ctx.session.item.host) message += '👤 ' + ctx.session.item.host + '\n';
+    if (ctx.session.item.guest) message += '🗣 ' + ctx.session.item.guest + '\n';
     if (ctx.session.item.channel) message += '📢 Via ' + ctx.session.item.channel + '\n';
-    if (ctx.session.item.date) message += '#️⃣ ID: [' + ctx.session.item.id + ']\n';
-    if (ctx.session.item.link) message += '\n🔗 Link: ' + ctx.session.item.link + '\n';
+    if (ctx.session.item.date) message += '#️⃣ ' + ctx.session.item.id + '\n';
+    if (ctx.session.item.link) message += '🔗 ' + ctx.session.item.link + '\n';
     return message;
 }
 
