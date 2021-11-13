@@ -402,6 +402,7 @@ function generate_message(arr) {
     arr.forEach(function (item) {
         message += `🎙 *${item.time.format('hh:mm A')}* | [${item.title}](${item.post}) \n\n`;
     });
+    message += '🔗 qvalive.com';
     return message;
 }
 
