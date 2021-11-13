@@ -408,11 +408,10 @@ function generate_message(arr) {
 
 // -------------cron job ---------------------------
 
-// cron.schedule('0 10 * * *', () => {
+cron.schedule('0 11 * * *', () => {
 qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
-console.log(qvalive_url);
 craw.queue(qvalive_url);
-// });
+});
 
 // -------------bot - handler ---------------------------
 
