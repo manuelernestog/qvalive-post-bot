@@ -8,12 +8,20 @@ const channelID = "-1001699259987"; // TestChannel
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
+
+moment.updateLocale('es', {
+    monthsShort: [
+        "Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sep.", "Oct.", "Nov.", "Dic."
+    ],
+    weekdaysShort: ["Dom.", "Lun.", "Mar.", "Mie.", "Jue.", "Vie.", "Sab."]
+});
+
 const Crawler = require("crawler");
 const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-var qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -116,7 +124,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/'+channelName+'?q=' +moment().subtract(5, 'hours').format('ddd DD / MMM');
+        qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -129,7 +137,7 @@ const webListUpdater = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+            // const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
         }
         done();
     }
@@ -193,8 +201,8 @@ function item_message(ctx) {
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
     if (ctx.session.item.date) message += '🗓 ' + ctx.session.item.date + '\n';
     if (ctx.session.item.time) message += '⏱ ' + ctx.session.item.time + '\n';
-    if (ctx.session.item.host) message += '👤 Anf ' + ctx.session.item.host + '\n';
-    if (ctx.session.item.guest) message += '🗣 Inv ' + ctx.session.item.guest + '\n';
+    if (ctx.session.item.host) message += '👤 Anf. ' + ctx.session.item.host + '\n';
+    if (ctx.session.item.guest) message += '🗣 Inv. ' + ctx.session.item.guest + '\n';
     if (ctx.session.item.channel) message += '📢 Vía ' + ctx.session.item.channel + '\n';
     if (ctx.session.item.link) message += '🔗 ' + ctx.session.item.link + '\n';
     return message;
@@ -219,8 +227,8 @@ function render_main_menu(ctx) {
 
 function render_text_length_message(ctx) {
     let message = item_message(ctx)
-    if (message.length > 280){
-        ctx.reply("⚠️ Su mensaje excede los 280 caracteres ("+message.length+") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
+    if (message.length > 280) {
+        ctx.reply("⚠️ Su mensaje excede los 280 caracteres (" + message.length + ") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
     }
 }
 
@@ -319,7 +327,7 @@ function send_message(ctx) {
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply(
-`Listo, tu publicación se completó satisfactoriamente, ahora sera moderada (Siempre en menos de 24h) y publicada en el canal @QvaLive.
+        `Listo, tu publicación se completó satisfactoriamente, ahora sera moderada (Siempre en menos de 24h) y publicada en el canal @QvaLive.
 
 Desde QvaLive te sugerimos utilizar la publicación del canal para compartirla con tu comunidad, de esta manera contribuimos entre todos al crecimiento de los proyectos incluidos en la plataforma (incluido el tuyo claro).`
     );
@@ -336,7 +344,7 @@ const craw = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+            // const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
 
             let message = generate_message(publication_list);
             bot.api.unpinAllChatMessages(channelID);
@@ -357,11 +365,11 @@ const craw = new Crawler({
 function creating_publication_list(res) {
     var $ = res.$;
     var publication_array = [];
-    $(".tgme_widget_message").each(function (index, element) {
+    $(".tgme_widget_message_text").each(function (index, element) {
         let item = {};
-        item.post = 'https://t.me/' + $(element).attr('data-post');
-        item.title =  $(element).find('b').eq(1).text();
-        let time = $(element).find('.tgme_widget_message_text').text().split('⏱ ')[1].substring(0, 8);
+        item.post = 'https://t.me/' + $(element).parent().parent().attr('data-post');
+        item.title = $(element).children('b').text();
+        let time = $(element).text().split('⏱')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
     });
@@ -399,10 +407,11 @@ function generate_message(arr) {
 
 // -------------cron job ---------------------------
 
-cron.schedule('0 12 * * *', () => {
-    qvalive_url = 'https://t.me/s/'+channelName+'?q=' + moment().format('ddd DD MMM');
-    craw.queue(qvalive_url);
-});
+// cron.schedule('0 10 * * *', () => {
+qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
+console.log(qvalive_url);
+craw.queue(qvalive_url);
+// });
 
 // -------------bot - handler ---------------------------
 
