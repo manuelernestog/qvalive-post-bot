@@ -1,9 +1,11 @@
-process.env["BOT_TOKEN"] = "2100982315:AAF3bkoBudsHuno5p7YKc0qs4ORtBB_nQrE"; // test bot key
-const channelName = "qvalivetestchannel"; //  TestChannel
-const channelID = "-1001699259987"; // TestChannel
+// process.env["BOT_TOKEN"] = "2100982315:AAF3bkoBudsHuno5p7YKc0qs4ORtBB_nQrE"; // test bot key
+// const channelName = "qvalivetestchannel"; //  TestChannel
+// const channelID = "-1001699259987"; // TestChannel
 
-// const channelName = "qvalive"; // OriginalChannel
-// const channelID = "-1001762987728";  //  OriginalChannel
+// formato para el domingo ----->>>>     ddd[+]DD[+]MMM
+
+const channelName = "qvalive"; // OriginalChannel
+const channelID = "-1001762987728";  //  OriginalChannel
 
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
@@ -21,7 +23,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-var qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
+var qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
@@ -124,7 +126,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
+        qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -137,7 +139,7 @@ const webListUpdater = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            // const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
         }
         done();
     }
@@ -344,7 +346,7 @@ const craw = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            // const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
 
             let message = generate_message(publication_list);
             bot.api.unpinAllChatMessages(channelID);
@@ -409,8 +411,8 @@ function generate_message(arr) {
 // -------------cron job ---------------------------
 
 cron.schedule('0 11 * * *', () => {
-qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
-craw.queue(qvalive_url);
+    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('DDMMYYYY');
+    craw.queue(qvalive_url);
 });
 
 // -------------bot - handler ---------------------------
