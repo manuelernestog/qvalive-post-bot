@@ -27,7 +27,7 @@ var publication_list = {};
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
     .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
-    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").text("📢 Via", "set_channel").row()
+    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").text("📢 Vía", "set_channel").row()
     .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
 
@@ -157,7 +157,7 @@ bot.callbackQuery("set_host", async (ctx) => remove_main_and_request_input(ctx, 
 bot.callbackQuery("set_guest", async (ctx) => remove_main_and_request_input(ctx, "guest", 'Introduzca el invitado de la publicación'));
 bot.callbackQuery("set_platform", async (ctx) => remove_main_and_request_input(ctx, "platform", 'Introduzca la plataforma de la publicación'));
 bot.callbackQuery("set_group", async (ctx) => remove_main_and_request_input(ctx, "group", 'Introduzca el grupo de la publicación'));
-bot.callbackQuery("set_channel", async (ctx) => remove_main_and_request_input(ctx, "channel", 'Introduzca el canal de la publicación'));
+bot.callbackQuery("set_channel", async (ctx) => remove_main_and_request_input(ctx, "channel", 'Introduzca el canal, grupo o perfil de la publicación. Puede utilizar @ por ejemplo @qvalive '));
 bot.callbackQuery("set_cover", async (ctx) => remove_main_and_request_input(ctx, "cover", 'Envie la imagen de la portada'));
 bot.callbackQuery("set_cancel", async (ctx) => cancel_process(ctx));
 bot.callbackQuery("set_back", async (ctx) => {
