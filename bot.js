@@ -11,6 +11,8 @@ const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require
 const bot = new Bot(process.env.BOT_TOKEN);
 const moment = require('moment');
 
+var twitter = require('twitter-text')
+
 moment.updateLocale('es', {
     monthsShort: [
         "Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sep.", "Oct.", "Nov.", "Dic."
@@ -171,8 +173,8 @@ bot.callbackQuery("set_launch", async (ctx) => send_message(ctx));
 bot.callbackQuery("set_ready", async (ctx) => {
     if (!ctx.session.item.title || !ctx.session.item.date || !ctx.session.item.time || ctx.session.item.date == 'Fecha inválida' || ctx.session.item.time == 'Fecha inválida') {
         ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
-        ctx.reply("🛑 Hay campos requeridos (*) sin rellenar o valores invalidos.");
         render_main_menu(ctx);
+        ctx.reply("🛑 Hay campos requeridos (*) sin rellenar o valores invalidos.");
     } else {
         render_release_menu(ctx);
     }
@@ -212,8 +214,6 @@ function item_message(ctx) {
 
 function render_main_menu(ctx) {
     let message = item_message(ctx)
-    render_text_length_message(ctx);
-
     if (ctx.session.item.cover) {
         ctx.replyWithPhoto(ctx.session.item.cover, {
             caption: message,
@@ -225,18 +225,18 @@ function render_main_menu(ctx) {
             reply_markup: mainKeyboard, parse_mode: "HTML",
         });
     }
+    render_text_length_message(ctx);
 }
 
 function render_text_length_message(ctx) {
     let message = item_message(ctx)
-    if (message.length > 280) {
-        ctx.reply("⚠️ Su mensaje excede los 280 caracteres (" + message.length + ") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
+    if (!twitter.parseTweet(message).valid) {
+        ctx.reply("⚠️ Su mensaje excede los 280 caracteres (" + twitter.parseTweet(message).weightedLength + ") por lo que en Twitter no sera mostrado completamente, puede publicarlo así o intentar reducir el contenido.");
     }
 }
 
 function render_release_menu(ctx) {
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
-    render_text_length_message(ctx);
     let message = item_message(ctx);
     if (ctx.session.item.cover) {
         ctx.replyWithPhoto(ctx.session.item.cover, {
@@ -250,6 +250,7 @@ function render_release_menu(ctx) {
             parse_mode: "HTML",
         });
     }
+    render_text_length_message(ctx);
 }
 
 function cancel_process(ctx) {
