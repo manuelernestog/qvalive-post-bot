@@ -2,8 +2,6 @@
 // const channelName = "qvalivetestchannel"; //  TestChannel
 // const channelID = "-1001699259987"; // TestChannel
 
-// formato para el domingo ----->>>>     ddd[+]DD[+]MMM
-
 const channelName = "qvalive"; // OriginalChannel
 const channelID = "-1001762987728";  //  OriginalChannel
 
@@ -25,13 +23,13 @@ const cron = require("node-cron");
 const axios = require("axios");
 moment.locale('es');
 
-var qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
+var qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
 var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
     .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
-    .text("🗓 Fecha*", "set_date").text("⏱ Hora*", "set_time").text("📢 Vía", "set_channel").row()
+    .text("🗓 Fecha*", "set_date").text("🕑 Hora*", "set_time").text("📢 Vía", "set_channel").row()
     .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
 
@@ -128,7 +126,7 @@ bot.on('message:photo', (ctx) => {
 
 bot.hears(/(.+)/, (ctx) => {
     if (ctx.chat.id == channelID) {
-        qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('DDMMYYYY');
+        qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
         webListUpdater.queue(qvalive_url);
         return;
     }
@@ -204,7 +202,7 @@ function item_message(ctx) {
 
     if (ctx.session.item.desc) message += ctx.session.item.desc + '\n\n';
     if (ctx.session.item.date) message += '🗓 ' + ctx.session.item.date + '\n';
-    if (ctx.session.item.time) message += '⏱ ' + ctx.session.item.time + '\n';
+    if (ctx.session.item.time) message += '🕑 ' + ctx.session.item.time + '\n';
     if (ctx.session.item.host) message += '👤 Anf. ' + ctx.session.item.host + '\n';
     if (ctx.session.item.guest) message += '🗣 Inv. ' + ctx.session.item.guest + '\n';
     if (ctx.session.item.channel) message += '📢 Vía ' + ctx.session.item.channel + '\n';
@@ -372,7 +370,7 @@ function creating_publication_list(res) {
         let item = {};
         item.post = 'https://t.me/' + $(element).parent().parent().attr('data-post');
         item.title = $(element).children('b').text();
-        let time = $(element).text().split('⏱')[1].substring(0, 8);
+        let time = $(element).text().split('🕑')[1].substring(0, 8);
         item.time = moment(time, 'hh:mm A');
         publication_array.push(item);
     });
@@ -412,7 +410,7 @@ function generate_message(arr) {
 // -------------cron job ---------------------------
 
 cron.schedule('0 11 * * *', () => {
-    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('DDMMYYYY');
+    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
     craw.queue(qvalive_url);
 });
 
