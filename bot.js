@@ -328,10 +328,15 @@ function send_message(ctx) {
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply(
-        `Listo, tu publicación se completó satisfactoriamente, ahora sera moderada (Siempre en menos de 24h) y publicada en el canal @QvaLive.
+        `Listo, tu publicación se completó satisfactoriamente, ahora será moderada (Siempre en menos de 24h) y publicada en los canales de @QvaLive.
 
-Desde QvaLive te sugerimos utilizar la publicación del canal para compartirla con tu comunidad, de esta manera contribuimos entre todos al crecimiento de los proyectos incluidos en la plataforma (incluido el tuyo claro).`
-    );
+* [Sitio Web](https://qvalive.com)
+* [Telegram](https://t.me/qvalive)
+* [Twitter](https://twitter.com/qvalive)
+* [Facebook](https://www.facebook.com/qvalive)
+
+✨ Te sugerimos utilizar la publicación generada por QvaLive y para compartirla en tus redes sociales.`
+    ,{parse_mode: "Markdown"});
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 }
