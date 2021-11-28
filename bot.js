@@ -335,7 +335,7 @@ function send_message(ctx) {
 🔸 [Twitter](https://twitter.com/qvalive)
 🔸 [Facebook](https://www.facebook.com/qvalive)
 
-✨ Te sugerimos utilizar la publicación generada por QvaLive y para compartirla en tus redes sociales.`
+✨ Te sugerimos compartir en tus redes sociales la publicación generada por QvaLive.`
         , {parse_mode: "Markdown", disable_web_page_preview: true});
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
