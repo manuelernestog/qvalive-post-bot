@@ -330,10 +330,10 @@ function send_message(ctx) {
     ctx.reply(
         `Listo, tu publicación se completó satisfactoriamente, ahora será moderada (Siempre en menos de 24h) y publicada en los canales de @QvaLive.
 
-* [Sitio Web](https://www.qvalive.com)
-* [Telegram](https://t.me/qvalive)
-* [Twitter](https://www.twitter.com/qvalive)
-* [Facebook](https://www.facebook.com/qvalive)
+[Sitio Web](https://qvalive.com)
+[Telegram](https://t.me/qvalive)
+[Twitter](https://twitter.com/qvalive)
+[Facebook](https://www.facebook.com/qvalive)
 
 ✨ Te sugerimos utilizar la publicación generada por QvaLive y para compartirla en tus redes sociales.`
     ,{parse_mode: "Markdown"});
