@@ -328,15 +328,15 @@ function send_message(ctx) {
     }
     ctx.api.deleteMessage(ctx.update.callback_query.message.chat.id, ctx.update.callback_query.message.message_id);
     ctx.reply(
-        `Listo, tu publicación se completó satisfactoriamente, ahora será moderada (Siempre en menos de 24h) y publicada en los canales de @QvaLive.
+        `Listo, tu publicación se completó satisfactoriamente, ahora será moderada (Siempre en menos de 24h) y publicada en los canales de @QvaLive 🚀
 
-[Sitio Web](https://qvalive.com)
-[Telegram](https://t.me/qvalive)
-[Twitter](https://twitter.com/qvalive)
-[Facebook](https://www.facebook.com/qvalive)
+🔸 [Sitio Web](https://qvalive.com)
+🔸 [Telegram](https://t.me/qvalive)
+🔸 [Twitter](https://twitter.com/qvalive)
+🔸 [Facebook](https://www.facebook.com/qvalive)
 
 ✨ Te sugerimos utilizar la publicación generada por QvaLive y para compartirla en tus redes sociales.`
-    ,{parse_mode: "Markdown"});
+        , {parse_mode: "Markdown", disable_web_page_preview: true});
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
 }
