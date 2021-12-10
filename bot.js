@@ -88,11 +88,11 @@ bot.command('borrar', (ctx) => {
 });
 
 bot.command('cartelera', (ctx) => {
-    if (ctx.chat.id == channelID) return;
-console.log(ctx.message);
-    // qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
-    // craw.queue(qvalive_url);
-    // return;
+    if (ctx.message.from.id != 666997614) return;
+
+    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
+    craw.queue(qvalive_url);
+    return;
 });
 
 bot.on('message:text', (ctx) => {
