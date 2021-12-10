@@ -90,15 +90,9 @@ bot.command('borrar', (ctx) => {
 bot.command('cartelera', (ctx) => {
     if (ctx.chat.id == channelID) return;
 
-    if (ctx.session.state == 'home') {
-        let message = generate_message(publication_list);
-        ctx.replyWithPhoto("https://i.ibb.co/0Cdy6PV/Qvalive.png", {
-            caption: message,
-            parse_mode: "Markdown",
-            disable_web_page_preview: true
-        });
-        render_main_menu(ctx);
-    }
+    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
+    webListUpdater.queue(qvalive_url);
+    return;
 });
 
 bot.on('message:text', (ctx) => {
