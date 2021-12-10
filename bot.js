@@ -89,7 +89,7 @@ bot.command('borrar', (ctx) => {
 
 bot.command('cartelera', (ctx) => {
     if (ctx.chat.id == channelID) return;
-console.log(ctx);
+console.log(ctx.message);
     // qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
     // craw.queue(qvalive_url);
     // return;
