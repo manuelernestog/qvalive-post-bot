@@ -89,10 +89,10 @@ bot.command('borrar', (ctx) => {
 
 bot.command('cartelera', (ctx) => {
     if (ctx.chat.id == channelID) return;
-
-    qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().subtract(5, 'hours').format('ddd[+]DD[+]MMM');
-    webListUpdater.queue(qvalive_url);
-    return;
+console.log(ctx);
+    // qvalive_url = 'https://t.me/s/' + channelName + '?q=' + moment().format('ddd[+]DD[+]MMM');
+    // craw.queue(qvalive_url);
+    // return;
 });
 
 bot.on('message:text', (ctx) => {
