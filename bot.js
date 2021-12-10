@@ -28,7 +28,6 @@ var publication_list = {};
 
 const mainKeyboard = new InlineKeyboard()
     .text("✏️ Título*", "set_title").text("🗒 Descripción", "set_desc").text("🖼 Portada", "set_cover").row()
-    .text("💠️ Espacio", "set_space").text("*️⃣ Temporada", "set_season").text("#️⃣ Capítulo", "set_episode").row()
     .text("🗓 Fecha*", "set_date").text("🕑 Hora*", "set_time").text("📢 Vía", "set_channel").row()
     .text("👤 Anfitrión", "set_host").text("🗣 Invitado", "set_guest").text("🔗 Link", "set_link").row()
     .text("❌ Cancelar", "set_cancel").text("🚀 Listo", "set_ready").row();
@@ -84,6 +83,20 @@ bot.command('borrar', (ctx) => {
     if (ctx.session.state != 'home') {
         delete ctx.session.item[ctx.session.state];
         ctx.session.state = 'home';
+        render_main_menu(ctx);
+    }
+});
+
+bot.command('cartelera', (ctx) => {
+    if (ctx.chat.id == channelID) return;
+
+    if (ctx.session.state == 'home') {
+        let message = generate_message(publication_list);
+        ctx.replyWithPhoto("https://i.ibb.co/0Cdy6PV/Qvalive.png", {
+            caption: message,
+            parse_mode: "Markdown",
+            disable_web_page_preview: true
+        });
         render_main_menu(ctx);
     }
 });
@@ -148,17 +161,11 @@ const webListUpdater = new Crawler({
 
 bot.callbackQuery("set_title", async (ctx) => remove_main_and_request_input(ctx, "title", 'Introduzca el título de la publicación'));
 bot.callbackQuery("set_desc", async (ctx) => remove_main_and_request_input(ctx, "desc", 'Introduzca la descripción de la publicación'));
-bot.callbackQuery("set_theme", async (ctx) => remove_main_and_request_input(ctx, "theme", 'Introduzca la tema (utilice #)'));
 bot.callbackQuery("set_link", async (ctx) => remove_main_and_request_input(ctx, "link", 'Introduzca el link de la publicación'));
 bot.callbackQuery("set_date", async (ctx) => remove_main_and_request_input(ctx, "date", 'Introduzca la fecha de la publicación (Puede utilizar el formato que le resulte mas fácil: DD/MM/YYYY , DD/MM, DD-MM , entre otros )'));
 bot.callbackQuery("set_time", async (ctx) => remove_main_and_request_input(ctx, "time", 'Introduzca la hora de la publicación (Utilice el formato: HH:mm)'));
-bot.callbackQuery("set_space", async (ctx) => remove_main_and_request_input(ctx, "space", 'Introduzca el nombre del espacio'));
-bot.callbackQuery("set_episode", async (ctx) => remove_main_and_request_input(ctx, "episode", 'Introduzca el número del episodio'));
-bot.callbackQuery("set_season", async (ctx) => remove_main_and_request_input(ctx, "season", 'Introduzca el número de la temporada'));
 bot.callbackQuery("set_host", async (ctx) => remove_main_and_request_input(ctx, "host", 'Introduzca el anfitrión de la publicación'));
 bot.callbackQuery("set_guest", async (ctx) => remove_main_and_request_input(ctx, "guest", 'Introduzca el invitado de la publicación'));
-bot.callbackQuery("set_platform", async (ctx) => remove_main_and_request_input(ctx, "platform", 'Introduzca la plataforma de la publicación'));
-bot.callbackQuery("set_group", async (ctx) => remove_main_and_request_input(ctx, "group", 'Introduzca el grupo de la publicación'));
 bot.callbackQuery("set_channel", async (ctx) => remove_main_and_request_input(ctx, "channel", 'Introduzca el canal, grupo o perfil de la publicación. Puede utilizar @ por ejemplo @qvalive '));
 bot.callbackQuery("set_cover", async (ctx) => remove_main_and_request_input(ctx, "cover", 'Envie la imagen de la portada'));
 bot.callbackQuery("set_cancel", async (ctx) => cancel_process(ctx));
