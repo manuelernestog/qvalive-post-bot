@@ -146,6 +146,7 @@ const webListUpdater = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
+            console.log(publication_list);
             const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
         }
         done();
@@ -336,7 +337,7 @@ function send_message(ctx) {
 🔸 [Twitter](https://twitter.com/qvalive)
 🔸 [Facebook](https://www.facebook.com/qvalive)
 
-✨ Te sugerimos compartir en tus redes sociales la publicación generada por QvaLive.`
+✨ Te sugerimos compartir en tus redes sociales la publicación publicada por QvaLive.`
         , {parse_mode: "Markdown", disable_web_page_preview: true});
     ctx.session = {};
     ctx.reply(welcomen_message(ctx));
