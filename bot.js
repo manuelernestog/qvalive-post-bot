@@ -1,9 +1,6 @@
-// process.env["BOT_TOKEN"] = "2100982315:AAF3bkoBudsHuno5p7YKc0qs4ORtBB_nQrE"; // test bot key
-// const channelName = "qvalivetestchannel"; //  TestChannel
-// const channelID = "-1001699259987"; // TestChannel
-
-const channelName = "qvalive"; // OriginalChannel
-const channelID = "-1001762987728";  //  OriginalChannel
+const channelName = process.env.CHANNEL_NAME;
+const channelID =  process.env.CHANNEL_ID;
+const getPantry_ID =  process.env.PANTRY_ID;
 
 const {Bot, session, Keyboard, InlineKeyboard, GrammyError, HttpError} = require('grammy');
 const bot = new Bot(process.env.BOT_TOKEN);
@@ -320,8 +317,6 @@ function rules_message(ctx) {
 Estos Términos y Condiciones fueron actualizados el 30/10/2021.`;
 }
 
-// Id del canal principal -1001762987728
-
 function send_message(ctx) {
     if (ctx.session.item.cover) {
         ctx.api.sendPhoto("-741787409", ctx.session.item.cover, {caption: item_message(ctx), parse_mode: "HTML"});
@@ -352,7 +347,7 @@ const craw = new Crawler({
             console.log(error);
         } else {
             publication_list = creating_publication_list(res);
-            const response = axios.post('https://getpantry.cloud/apiv1/pantry/dc2f73ce-3680-45cd-b910-d6c5e912ddfd/basket/qvalive_publication_list', array_to_obj(publication_list));
+            const response = axios.post('https://getpantry.cloud/apiv1/pantry/'+ getPantry_ID +'/basket/qvalive_publication_list', array_to_obj(publication_list));
 
             let message = generate_message(publication_list);
             bot.api.unpinAllChatMessages(channelID);
