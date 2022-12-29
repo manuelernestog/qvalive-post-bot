@@ -1,6 +1,6 @@
 # qvalive-post-bot
 
-Bot para publicar charlas en el canal de Qvalive con menu de publicaciones, publicaciones recurrentes con nodecron y sessiones
+Bot to publish talks in the Qvalive channel with posts menu, recurring posts remainder with node-cron and sessions
 
 Stack
 
